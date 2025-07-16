@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en" class="bg-gray-900 text-white">
+<head>
+  <meta charset="UTF-8" />
+  <title>TradeTitan 2.0 Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="p-6">
+  <h1 class="text-4xl font-bold mb-6 text-center">TradeTitan 2.0 Dashboard</h1>
+
+  <!-- Bot Status -->
+  <div id="botStatus" class="mb-6 text-center font-semibold text-green-500">
+    ✅ Bot is RUNNING
+  </div>
+
+  <!-- Kill Switch Button -->
+  <div class="text-center mb-6# risk_manager.py
+
+import numpy as np
+
+class RiskManager:
+    def __init__(self, balance, max_risk_pct=0.02, min_confidence=85):
+        """
+        :param balance: Current account balance
+        :param max_risk_pct: Max percentage of capital to risk per trade
+        :param min_confidence: Minimum confidence required to take a trade
+        """
+        self.balance = balance
+        self.max_risk_pct = max_risk_pct
+        self.min_confidence = min_confidence
+        self.daily_loss_limit_pct = 0.10  # stop trading after 10% daily loss
+        self.daily_loss_counter = 0
+
+    def update_balance(self, new_balance):
+        self.balance = new_balance
+
+    def calculate_volatility(self, price_series, method='atr', period=14):
+        if method == 'atr':
+            price_series = np.array(price_series)
+            high = price_series[:, 0]
+            low = price_series[:, 1]
+            close = price_series[:, 2]
+            tr = np.maximum(high - low, np.abs(high - close[:-1]), np.abs(low - close[:-1]))
+            atr = np.mean(tr[-period:])
+            return atr
+        elif method == 'std':
+            return np.std(price_series[-period:])
+        else:
+            raise ValueError("Unsupported volatility method")
+
+    def calculate_risk(self, confidence, volatility, trade_direction):
+        """
+        :param confidence: Confidence score of the trade (0-100)
+        :param volatility: Estimated volatility (e.g., ATR or BB width)
+        :param trade_direction: 'buy' or 'sell'
+        :return: dict with sl, tp, position_size
+        """
+        if confidence < self.min_confidence:
+            return None  # Do not trade
+
+        # Risk percentage based on confidence (scale up with higher confidence)
+        risk_pct = min(self.max_risk_pct * (confidence / 100), self.max_risk_pct * 2)
+
+        # Capital at risk
+        capital_at_risk = self.balance * risk_pct
+
+        # SL/TP distance in price units (example: 1.5x volatility for SL, 2.5x for TP)
+        stop_loss = 1.5 * volatility
+        take_profit = 2.5 * volatility
+
+        # Position size: how many contracts to risk the defined capital
+        position_size = capital_at_risk / stop_loss
+
+        return {
+            'stop_loss': round(stop_loss, 5),
+            'take_profit': round(take_profit, 5),
+            'position_size': round(position_size, 2),
+            'risk_pct': round(risk_pct * 100, 2)
+        }
+
+    def should_halt_trading(self, daily_loss_pct):
+        """
+        Stops trading if daily loss limit is breached.
+        """
+        return daily_loss_pct >= self.daily_loss_limit_pct
+    <button
+      id="killSwitchBtn"
+      class="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-6 rounded-xl"
+    >
+      Kill Switch - Stop Bot
+    </button>
+  </div>
+
+  <!-- Summary Cards -->
+  <div class="grid grid-cols-1 md:grid-# risk_manager.py
+
+import numpy as np
+
+class RiskManager:
+    def __init__(self, balance, max_risk_pct=0.02, min_confidence=85):
+        """
+        :param balance: Current account balance
+        :param max_risk_pct: Max percentage of capital to risk per trade
+        :param min_confidence: Minimum confidence required to take a trade
+        """
+        self.balance = balance
+        self.max_risk_pct = max_risk_pct
+        self.min_confidence = min_confidence
+        self.daily_loss_limit_pct = 0.10  # stop trading after 10% daily loss
+        self.daily_loss_counter = 0
+
+    def update_balance(self, new_balance):
+        self.balance = new_balance
+
+    def calculate_volatility(self, price_series, method='atr', period=14):
+        if method == 'atr':
+            price_series = np.array(price_series)
+            high = price_series[:, 0]
+            low = price_series[:, 1]
+            close = price_series[:, 2]
+            tr = np.maximum(high - low, np.abs(high - close[:-1]), np.abs(low - close[:-1]))
+            atr = np.mean(tr[-period:])
+            return atr
+        elif method == 'std':
+            return np.std(price_series[-period:])
+        else:
+            raise ValueError("Unsupported volatility method")
+
+    def calculate_risk(self, confidence, volatility, trade_direction):
+        """
+        :param confidence: Confidence score of the trade (0-100)
+        :param volatility: Estimated volatility (e.g., ATR or BB width)
+        :param trade_direction: 'buy' or 'sell'
+        :return: dict with sl, tp, position_size
+        """
+        if confidence < self.min_confidence:
+            return None  # Do not trade
+
+        # Risk percentage based on confidence (scale up with higher confidence)
+        risk_pct = min(self.max_risk_pct * (confidence / 100), self.max_risk_pct * 2)
+
+        # Capital at risk
+        capital_at_risk = self.balance * risk_pct
+
+        # SL/TP distance in price units (example: 1.5x volatility for SL, 2.5x for TP)
+        stop_loss = 1.5 * volatility
+        take_profit = 2.5 * volatility
+
+        # Position size: how many contracts to risk the defined capital
+        position_size = capital_at_risk / stop_loss
+
+        return {
+            'stop_loss': round(stop_loss, 5),
+            'take_profit': round(take_profit, 5),
+            'position_size': round(position_size, 2),
+            'risk_pct': round(risk_pct * 100, 2)
+        }
+
+    def should_halt_trading(self, daily_loss_pct):
+        """
+        Stops trading if daily loss limit is breached.
+        """
+        return daily_loss_pct >= self.daily_loss_limit_pct-3 gap-6 mb-8 text-center">
+    <div class="bg-gray-800 p-6 rounded-2xl shadow-lg">
+      <h2 class="text-lg font-semibold">Total Profit</h2>
+      <p id="profit" class="text-2xl font-bold text-green-400">Loading...</p>
+    </div>
+    <div class="bg-gray-800 p-6 rounded-2xl shadow-lg">
+      <h2 class="text-lg font-semibold">Win Rate</h2>
+      <p id="winrate" class="text-2xl font-bold text-yellow-400">Loading...</p>
+    </div>
+    <div class="bg-gray-800 p-6 rounded-2xl shadow-lg">
+      <h2 class="text-lg font-semibold">Total Trades</h2>
+      <p id="count" class="text-2xl font-bold text-blue-400">Loading...</p>
+    </div>
+  </div>
+
+  <!-- Best/Worst Trades -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 text-center">
+    <div class="bg-gray-800 p-6 rounded-2xl shadow-lg">
+      <h2 class="text-lg font-semibold text-green-400">Best Trade</h2>
+      <p id="best-trade" class="text-xl font-bold">Loading...</p>
+    </div>
+    <div class="bg-gray-800 p-6 rounded-2xl shadow-lg">
+      <h2 class="text-lg font-semibold text-red-400">Worst Trade</h2>
+      <p id="worst-trade" class="text-xl font-bold">Loading...</p>
+    </div>
+  </div>
+
+  <!-- Trade Filter + Chart -->
+  <div class="flex justify-between items-center mb-4">
+    <h2 class="text-xl font-semibold">Profit per Trade</h2>
+    <select id="filter" class="bg-gray-700 text-white p-2 rounded-md">
+      <option value="10">Last 10</option>
+      <option value="25">Last 25</option>
+      <option value="50">Last 50</option>
+      <option value="100">Last 100</option>
+      <option value="all" selected>All</option>
+    </select>
+  </div>
+  <div class="bg-gray-800 p-4 rounded-2xl shadow-lg mb-8">
+    <canvas id="tradeChart" height="100"></canvas>
+  </div>
+
+  <!-- Trade Table -->
+  <h2 class="text-xl font-semibold mb-2">Trade History</h2>
+  <div class="overflow-x-auto max-h-96 bg-gray-800 rounded-2xl shadow-lg">
+    <table class="min-w-full table-auto text-sm">
+      <thead class="bg-gray-700">
+        <tr>
+          <th class="p-2 text-left">#</th>
+          <th class="p-2 text-left">Timestamp</th>
+          <th class="p-2 text-left">Strategy</th>
+          <th class="p-2 text-left">Result</th>
+          <th class="p-2 text-left">Profit</th>
+        </tr>
+      </thead>
+      <tbody id="trade-table" class="divide-y divide-gray-600"></tbody>
+    </table>
+  </div>
+
+  <script>
+    let allData = [];
+
+    async function loadDashboard() {
+      const res = await fetch("/data");
+      const data = await res.json();
+      allData = data.trades.reverse(); // latest first
+
+      document.getElementById("profit").innerText = data.total_profit.toFixed(2);
+      document.getElementById("winrate").innerText = data.win_rate.toFixed(2) + "%";
+      document.getElementById("count").innerText = allData.length;
+
+      document.getElementById("best-trade").innerText = `${data.best_trade.profit} (${data.best_trade.strategy})`;
+      document.getElementById("worst-trade").innerText = `${data.worst_trade.profit} (${data.worst_trade.strategy})`;
+
+      updateChart("all");
+      updateTable("all");
+    }
+
+    function updateChart(range) {
+      let filtered = filterData(range);
+      const labels = filtered.map((t, i) => `#${i + 1}`);
+      const profits = filtered.map((t) => t.profit);
+
+      const ctx = document.getElementById("tradeChart").getContext("2d");
+      if (window.tradeChart) window.tradeChart.destroy();
+      window.tradeChart = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels,
+          datasets: [
+            {
+              label: "Profit",
+              data: profits,
+              borderColor: "limegreen",
+              backgroundColor: "rgba(50,205,50,0.1)",
+              fill: true,
+              tension: 0.4,
+            },
+          ],
+        },
+        options: {
+          plugins: { legend: { labels: { color: "#fff" } } },
+          scales: {
+            x: { ticks: { color: "#bbb" } },
+            y: { ticks: { color: "#bbb" } },
+          },
+        },
+      });
+    }
+
+    function updateTable(range) {
+      const filtered = filterData(range);
+      const table = document.getElementById("trade-table");
+      table.innerHTML = "";
+
+      filtered.forEach((t, i) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td class="p-2">${i + 1}</td>
+          <td class="p-2">${new Date(t.timestamp).toLocaleString()}</td>
+          <td class="p-2">${t.strategy}</td>
+          <td class="p-2 text-${t.result === "win" ? "green" : "red"}-400">${t.result}</td>
+          <td class="p-2">${t.profit}</td>
+        `;
+        table.appendChild(row);
+      });
+    }
+
+    function filterData(range) {
+      if (range === "all") return allData;
+      return allData.slice(0, parseInt(range));
+    }
+
+    document.getElementById("filter").addEventListener("change", (e) => {
+      updateChart(e.target.value);
+      updateTable(e.target.value);
+    });
+
+    // Kill Switch Button Logic
+    document
+      .getElementById("killSwitchBtn")
+      .addEventListener("click", async () => {
+        const confirmed = confirm(
+          "Are you sure you want to STOP the bot? This action cannot be undone without restart."
+        );
+        if (!confirmed) return;
+
+        try {
+          const response = await fetch(
+            "/kill-switch?token=YOUR_SUPER_SECRET_TOKEN",
+            {
+              method: "POST",
+            }
+          );
+          const data = await response.json();
+
+          if (response.ok) {
+            alert("Kill switch activated! Trading has stopped.");
+            // Update UI
+            const btn = document.getElementById("killSwitchBtn");
+            btn.disabled = true;
+            btn.innerText = "Bot Stopped";
+            updateBotStatus();
+          } else {
+            alert(`Error: ${data.message}`);
+          }
+        } catch (err) {
+          alert("Failed to send kill switch command. Try again.");
+        }
+      });
+
+    // Bot Status Updater
+    async function updateBotStatus() {
+      try {
+        const res = await fetch("/status");
+        const data = await res.json();
+
+        const statusElem = document.getElementById("botStatus");
+        if (data.kill_switch_active) {
+          statusElem.innerText = "🚨 Bot is STOPPED (Kill Switch Active)";
+          statusElem.className = "mb-6 text-center font-semibold text-red-500";
+          // Disable kill button if stopped
+          const btn = document.getElementById("killSwitchBtn");
+          btn.disabled = true;
+          btn.innerText = "Bot Stopped";
+        } else {
+          statusElem.innerText = "✅ Bot is RUNNING";
+          statusElem.className = "mb-6 text-center font-semibold text-green-500";
+          const btn = document.getElementById("killSwitchBtn");
+          btn.disabled = false;
+          btn.innerText = "Kill Switch - Stop Bot";
+        }
+      } catch {
+        // Ignore errors silently
+      }
+    }
+
+    // Initial load
+    loadDashboard();
+    updateBotStatus();
+
+    // Refresh every 15s dashboard & status every 10s
+    setInterval(loadDashboard, 15000);
+    setInterval(updateBotStatus, 10000);
+  </script>
+</body>
+</html>
