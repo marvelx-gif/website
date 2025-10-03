@@ -1,370 +1,111 @@
-<!DOCTYPE html>
-<html lang="en" class="bg-gray-900 text-white">
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>TradeTitan 2.0 Dashboard</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>How to Buy Kodex (KDX) — Guide</title>
+  <meta name="description" content="Step-by-step, safe, and simple guide to buying Kodex (KDX) on Solana for beginners." />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    :root{--accent:#7c3aed}
+    body{background:#030312;color:#e6eef8;font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;margin:0}
+    .container{max-width:980px;margin:36px auto;padding:28px}
+    .kicker{color:var(--accent);font-weight:700}
+    .card{background:rgba(255,255,255,0.03);padding:18px;border-radius:12px;margin-bottom:18px}
+    pre{background:#08101a;padding:12px;border-radius:8px;overflow:auto}
+    a{color:var(--accent)}
+    .note{color:#9fb0c8;font-size:0.95rem}
+    .cta{display:inline-block;background:linear-gradient(90deg,var(--accent),#06b6d4);color:white;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700}
+    header h1{margin:0}
+  </style>
 </head>
-<body class="p-6">
-  <h1 class="text-4xl font-bold mb-6 text-center">TradeTitan 2.0 Dashboard</h1>
+<body>
+  <div class="container">
+    <header>
+      <div class="kicker">Kodex (KDX) — User Guide</div>
+      <h1 class="text-3xl font-bold mt-2">How to buy Kodex (KDX) — step‑by‑step</h1>
+      <p class="note mt-2">This is a static, beginner-friendly guide for purchasing KDX on Solana. Always double-check contract addresses and official links before transacting.</p>
+      <p class="mt-4"><a href="how_to_buy_kodex.pdf" class="cta">📄 Download PDF Version</a></p>
+    </header>
 
-  <!-- Bot Status -->
-  <div id="botStatus" class="mb-6 text-center font-semibold text-green-500">
-    ✅ Bot is RUNNING
+    <main class="mt-6">
+      <section class="card">
+        <h2 class="text-xl font-semibold">Quick summary</h2>
+        <p class="mt-2">High level: <strong>Install a Solana wallet (Phantom)</strong> → <strong>Buy or transfer SOL</strong> → <strong>Connect to a Solana DEX</strong> → <strong>Swap SOL for KDX</strong> → <strong>Add KDX token to your wallet</strong>.</p>
+      </section>
+
+      <section class="card">
+        <h3 class="font-semibold">Step 1 — Prepare a wallet (Phantom)</h3>
+        <ol class="mt-2 list-decimal ml-6">
+          <li>Install Phantom: <a href="https://phantom.app/" target="_blank" rel="noopener">phantom.app</a> (browser extension or mobile app).</li>
+          <li>Create a new wallet or restore from your seed phrase. <span class="note">Keep your seed phrase offline and private — never share it.</span></li>
+          <li>Enable the wallet and copy your public address (it starts with <code>...</code>).</li>
+        </ol>
+      </section>
+
+      <section class="card">
+        <h3 class="font-semibold">Step 2 — Get SOL (network fees and swap currency)</h3>
+        <p class="mt-2">You need SOL to pay transaction fees and to swap for KDX. Options:</p>
+        <ul class="ml-6 list-disc">
+          <li>Buy SOL on an exchange (Binance, Coinbase, or your local exchange) and withdraw to your Phantom address.</li>
+          <li>Use an on‑ramp widget integrated into Phantom (where available) to purchase SOL directly from the app.</li>
+        </ul>
+        <p class="note mt-2">Tip: keep a small extra amount (0.1–0.5 SOL) for multiple transactions and slippage.</p>
+      </section>
+
+      <section class="card">
+        <h3 class="font-semibold">Step 3 — Connect wallet to a Solana DEX</h3>
+        <p class="mt-2">When the token launches it will be available on Solana DEXes (e.g., Raydium, Orca). For now, use the official DEX link the project shares. To connect:</p>
+        <ol class="ml-6 list-decimal">
+          <li>Open the DEX website and click <em>Connect Wallet</em>.</li>
+          <li>Select <strong>Phantom</strong> and approve the connection in the extension/app.</li>
+        </ol>
+        <p class="note mt-2">Security: Only connect to official DEX links from Kodex channels (Telegram, official site). Be cautious of phishing sites.</p>
+      </section>
+
+      <section class="card">
+        <h3 class="font-semibold">Step 4 — Swap SOL → KDX</h3>
+        <p class="mt-2">Important: You must validate the official KDX token mint address before swapping. Replace <code>TOKEN_MINT_ADDRESS</code> below with the official contract address shared on Kodex channels.</p>
+        <pre><code>// Example (replace with real values in the DEX UI)
+Swap: SOL → KDX (TOKEN_MINT_ADDRESS)
+Slippage: 1% - 3% (raise only if transaction fails)
+Minimum received: check the computed amount before approving
+</code></pre>
+        <ol class="ml-6 list-decimal mt-2">
+          <li>Select SOL as the input and KDX (by pasting the token mint) as the output.</li>
+          <li>Set a reasonable slippage (1–3%) — increase only if needed.</li>
+          <li>Review the amounts and approve the swap in Phantom.</li>
+        </ol>
+        <p class="note mt-2">If the swap fails because of slippage, try increasing slippage slightly or retry when liquidity increases.</p>
+      </section>
+
+      <section class="card">
+        <h3 class="font-semibold">Step 5 — Add KDX to Phantom (token visibility)</h3>
+        <p class="mt-2">If KDX doesn’t appear automatically in your wallet after purchase:</p>
+        <ol class="ml-6 list-decimal">
+          <li>Open Phantom → Manage Token List → Search for KDX. If not found, click <em>Manage Token</em> &gt; <em>Add Custom Token</em>.</li>
+          <li>Paste the official token mint address and add the token. Now you'll see your KDX balance.</li>
+        </ol>
+      </section>
+
+      <section class="card">
+        <h3 class="font-semibold">Safety checklist (read this every time)</h3>
+        <ul class="ml-6 list-disc">
+          <li>Verify the official token mint address from Kodex's official channels (Telegram, website). Phishing contracts are common.</li>
+          <li>Check the DEX URL carefully. Bookmark official pages.</li>
+          <li>Beware of fake airdrops or 'claim' pages asking for seed phrases or private keys — never share them.</li>
+          <li>Use small test transactions first (e.g., swap 1–5 USD worth) to confirm everything works before larger trades.</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h3 class="font-semibold">Need help?</h3>
+        <p class="mt-2">Join the community for real-time help and official announcements:</p>
+        <p class="mt-2"><a class="cta" href="https://t.me/cradle_kodex_corp" target="_blank" rel="noopener">Join Telegram (@cradle_kodex_corp)</a> <span style="margin-left:12px" class="note"></span> </p>
+      </section>
+
+      <footer class="mt-6 note">Disclaimer: This guide is educational and not financial advice. Always do your own research before transacting.</footer>
+    </main>
   </div>
-
-  <!-- Kill Switch Button -->
-  <div class="text-center mb-6# risk_manager.py
-
-import numpy as np
-
-class RiskManager:
-    def __init__(self, balance, max_risk_pct=0.02, min_confidence=85):
-        """
-        :param balance: Current account balance
-        :param max_risk_pct: Max percentage of capital to risk per trade
-        :param min_confidence: Minimum confidence required to take a trade
-        """
-        self.balance = balance
-        self.max_risk_pct = max_risk_pct
-        self.min_confidence = min_confidence
-        self.daily_loss_limit_pct = 0.10  # stop trading after 10% daily loss
-        self.daily_loss_counter = 0
-
-    def update_balance(self, new_balance):
-        self.balance = new_balance
-
-    def calculate_volatility(self, price_series, method='atr', period=14):
-        if method == 'atr':
-            price_series = np.array(price_series)
-            high = price_series[:, 0]
-            low = price_series[:, 1]
-            close = price_series[:, 2]
-            tr = np.maximum(high - low, np.abs(high - close[:-1]), np.abs(low - close[:-1]))
-            atr = np.mean(tr[-period:])
-            return atr
-        elif method == 'std':
-            return np.std(price_series[-period:])
-        else:
-            raise ValueError("Unsupported volatility method")
-
-    def calculate_risk(self, confidence, volatility, trade_direction):
-        """
-        :param confidence: Confidence score of the trade (0-100)
-        :param volatility: Estimated volatility (e.g., ATR or BB width)
-        :param trade_direction: 'buy' or 'sell'
-        :return: dict with sl, tp, position_size
-        """
-        if confidence < self.min_confidence:
-            return None  # Do not trade
-
-        # Risk percentage based on confidence (scale up with higher confidence)
-        risk_pct = min(self.max_risk_pct * (confidence / 100), self.max_risk_pct * 2)
-
-        # Capital at risk
-        capital_at_risk = self.balance * risk_pct
-
-        # SL/TP distance in price units (example: 1.5x volatility for SL, 2.5x for TP)
-        stop_loss = 1.5 * volatility
-        take_profit = 2.5 * volatility
-
-        # Position size: how many contracts to risk the defined capital
-        position_size = capital_at_risk / stop_loss
-
-        return {
-            'stop_loss': round(stop_loss, 5),
-            'take_profit': round(take_profit, 5),
-            'position_size': round(position_size, 2),
-            'risk_pct': round(risk_pct * 100, 2)
-        }
-
-    def should_halt_trading(self, daily_loss_pct):
-        """
-        Stops trading if daily loss limit is breached.
-        """
-        return daily_loss_pct >= self.daily_loss_limit_pct
-    <button
-      id="killSwitchBtn"
-      class="bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-6 rounded-xl"
-    >
-      Kill Switch - Stop Bot
-    </button>
-  </div>
-
-  <!-- Summary Cards -->
-  <div class="grid grid-cols-1 md:grid-# risk_manager.py
-
-import numpy as np
-
-class RiskManager:
-    def __init__(self, balance, max_risk_pct=0.02, min_confidence=85):
-        """
-        :param balance: Current account balance
-        :param max_risk_pct: Max percentage of capital to risk per trade
-        :param min_confidence: Minimum confidence required to take a trade
-        """
-        self.balance = balance
-        self.max_risk_pct = max_risk_pct
-        self.min_confidence = min_confidence
-        self.daily_loss_limit_pct = 0.10  # stop trading after 10% daily loss
-        self.daily_loss_counter = 0
-
-    def update_balance(self, new_balance):
-        self.balance = new_balance
-
-    def calculate_volatility(self, price_series, method='atr', period=14):
-        if method == 'atr':
-            price_series = np.array(price_series)
-            high = price_series[:, 0]
-            low = price_series[:, 1]
-            close = price_series[:, 2]
-            tr = np.maximum(high - low, np.abs(high - close[:-1]), np.abs(low - close[:-1]))
-            atr = np.mean(tr[-period:])
-            return atr
-        elif method == 'std':
-            return np.std(price_series[-period:])
-        else:
-            raise ValueError("Unsupported volatility method")
-
-    def calculate_risk(self, confidence, volatility, trade_direction):
-        """
-        :param confidence: Confidence score of the trade (0-100)
-        :param volatility: Estimated volatility (e.g., ATR or BB width)
-        :param trade_direction: 'buy' or 'sell'
-        :return: dict with sl, tp, position_size
-        """
-        if confidence < self.min_confidence:
-            return None  # Do not trade
-
-        # Risk percentage based on confidence (scale up with higher confidence)
-        risk_pct = min(self.max_risk_pct * (confidence / 100), self.max_risk_pct * 2)
-
-        # Capital at risk
-        capital_at_risk = self.balance * risk_pct
-
-        # SL/TP distance in price units (example: 1.5x volatility for SL, 2.5x for TP)
-        stop_loss = 1.5 * volatility
-        take_profit = 2.5 * volatility
-
-        # Position size: how many contracts to risk the defined capital
-        position_size = capital_at_risk / stop_loss
-
-        return {
-            'stop_loss': round(stop_loss, 5),
-            'take_profit': round(take_profit, 5),
-            'position_size': round(position_size, 2),
-            'risk_pct': round(risk_pct * 100, 2)
-        }
-
-    def should_halt_trading(self, daily_loss_pct):
-        """
-        Stops trading if daily loss limit is breached.
-        """
-        return daily_loss_pct >= self.daily_loss_limit_pct-3 gap-6 mb-8 text-center">
-    <div class="bg-gray-800 p-6 rounded-2xl shadow-lg">
-      <h2 class="text-lg font-semibold">Total Profit</h2>
-      <p id="profit" class="text-2xl font-bold text-green-400">Loading...</p>
-    </div>
-    <div class="bg-gray-800 p-6 rounded-2xl shadow-lg">
-      <h2 class="text-lg font-semibold">Win Rate</h2>
-      <p id="winrate" class="text-2xl font-bold text-yellow-400">Loading...</p>
-    </div>
-    <div class="bg-gray-800 p-6 rounded-2xl shadow-lg">
-      <h2 class="text-lg font-semibold">Total Trades</h2>
-      <p id="count" class="text-2xl font-bold text-blue-400">Loading...</p>
-    </div>
-  </div>
-
-  <!-- Best/Worst Trades -->
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8 text-center">
-    <div class="bg-gray-800 p-6 rounded-2xl shadow-lg">
-      <h2 class="text-lg font-semibold text-green-400">Best Trade</h2>
-      <p id="best-trade" class="text-xl font-bold">Loading...</p>
-    </div>
-    <div class="bg-gray-800 p-6 rounded-2xl shadow-lg">
-      <h2 class="text-lg font-semibold text-red-400">Worst Trade</h2>
-      <p id="worst-trade" class="text-xl font-bold">Loading...</p>
-    </div>
-  </div>
-
-  <!-- Trade Filter + Chart -->
-  <div class="flex justify-between items-center mb-4">
-    <h2 class="text-xl font-semibold">Profit per Trade</h2>
-    <select id="filter" class="bg-gray-700 text-white p-2 rounded-md">
-      <option value="10">Last 10</option>
-      <option value="25">Last 25</option>
-      <option value="50">Last 50</option>
-      <option value="100">Last 100</option>
-      <option value="all" selected>All</option>
-    </select>
-  </div>
-  <div class="bg-gray-800 p-4 rounded-2xl shadow-lg mb-8">
-    <canvas id="tradeChart" height="100"></canvas>
-  </div>
-
-  <!-- Trade Table -->
-  <h2 class="text-xl font-semibold mb-2">Trade History</h2>
-  <div class="overflow-x-auto max-h-96 bg-gray-800 rounded-2xl shadow-lg">
-    <table class="min-w-full table-auto text-sm">
-      <thead class="bg-gray-700">
-        <tr>
-          <th class="p-2 text-left">#</th>
-          <th class="p-2 text-left">Timestamp</th>
-          <th class="p-2 text-left">Strategy</th>
-          <th class="p-2 text-left">Result</th>
-          <th class="p-2 text-left">Profit</th>
-        </tr>
-      </thead>
-      <tbody id="trade-table" class="divide-y divide-gray-600"></tbody>
-    </table>
-  </div>
-
-  <script>
-    let allData = [];
-
-    async function loadDashboard() {
-      const res = await fetch("/data");
-      const data = await res.json();
-      allData = data.trades.reverse(); // latest first
-
-      document.getElementById("profit").innerText = data.total_profit.toFixed(2);
-      document.getElementById("winrate").innerText = data.win_rate.toFixed(2) + "%";
-      document.getElementById("count").innerText = allData.length;
-
-      document.getElementById("best-trade").innerText = `${data.best_trade.profit} (${data.best_trade.strategy})`;
-      document.getElementById("worst-trade").innerText = `${data.worst_trade.profit} (${data.worst_trade.strategy})`;
-
-      updateChart("all");
-      updateTable("all");
-    }
-
-    function updateChart(range) {
-      let filtered = filterData(range);
-      const labels = filtered.map((t, i) => `#${i + 1}`);
-      const profits = filtered.map((t) => t.profit);
-
-      const ctx = document.getElementById("tradeChart").getContext("2d");
-      if (window.tradeChart) window.tradeChart.destroy();
-      window.tradeChart = new Chart(ctx, {
-        type: "line",
-        data: {
-          labels,
-          datasets: [
-            {
-              label: "Profit",
-              data: profits,
-              borderColor: "limegreen",
-              backgroundColor: "rgba(50,205,50,0.1)",
-              fill: true,
-              tension: 0.4,
-            },
-          ],
-        },
-        options: {
-          plugins: { legend: { labels: { color: "#fff" } } },
-          scales: {
-            x: { ticks: { color: "#bbb" } },
-            y: { ticks: { color: "#bbb" } },
-          },
-        },
-      });
-    }
-
-    function updateTable(range) {
-      const filtered = filterData(range);
-      const table = document.getElementById("trade-table");
-      table.innerHTML = "";
-
-      filtered.forEach((t, i) => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-          <td class="p-2">${i + 1}</td>
-          <td class="p-2">${new Date(t.timestamp).toLocaleString()}</td>
-          <td class="p-2">${t.strategy}</td>
-          <td class="p-2 text-${t.result === "win" ? "green" : "red"}-400">${t.result}</td>
-          <td class="p-2">${t.profit}</td>
-        `;
-        table.appendChild(row);
-      });
-    }
-
-    function filterData(range) {
-      if (range === "all") return allData;
-      return allData.slice(0, parseInt(range));
-    }
-
-    document.getElementById("filter").addEventListener("change", (e) => {
-      updateChart(e.target.value);
-      updateTable(e.target.value);
-    });
-
-    // Kill Switch Button Logic
-    document
-      .getElementById("killSwitchBtn")
-      .addEventListener("click", async () => {
-        const confirmed = confirm(
-          "Are you sure you want to STOP the bot? This action cannot be undone without restart."
-        );
-        if (!confirmed) return;
-
-        try {
-          const response = await fetch(
-            "/kill-switch?token=YOUR_SUPER_SECRET_TOKEN",
-            {
-              method: "POST",
-            }
-          );
-          const data = await response.json();
-
-          if (response.ok) {
-            alert("Kill switch activated! Trading has stopped.");
-            // Update UI
-            const btn = document.getElementById("killSwitchBtn");
-            btn.disabled = true;
-            btn.innerText = "Bot Stopped";
-            updateBotStatus();
-          } else {
-            alert(`Error: ${data.message}`);
-          }
-        } catch (err) {
-          alert("Failed to send kill switch command. Try again.");
-        }
-      });
-
-    // Bot Status Updater
-    async function updateBotStatus() {
-      try {
-        const res = await fetch("/status");
-        const data = await res.json();
-
-        const statusElem = document.getElementById("botStatus");
-        if (data.kill_switch_active) {
-          statusElem.innerText = "🚨 Bot is STOPPED (Kill Switch Active)";
-          statusElem.className = "mb-6 text-center font-semibold text-red-500";
-          // Disable kill button if stopped
-          const btn = document.getElementById("killSwitchBtn");
-          btn.disabled = true;
-          btn.innerText = "Bot Stopped";
-        } else {
-          statusElem.innerText = "✅ Bot is RUNNING";
-          statusElem.className = "mb-6 text-center font-semibold text-green-500";
-          const btn = document.getElementById("killSwitchBtn");
-          btn.disabled = false;
-          btn.innerText = "Kill Switch - Stop Bot";
-        }
-      } catch {
-        // Ignore errors silently
-      }
-    }
-
-    // Initial load
-    loadDashboard();
-    updateBotStatus();
-
-    // Refresh every 15s dashboard & status every 10s
-    setInterval(loadDashboard, 15000);
-    setInterval(updateBotStatus, 10000);
-  </script>
 </body>
 </html>
